@@ -9,7 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="./img/icon.png" rel="shortcut icon"/>
     <title>星云应用商店</title>
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="jquery.min.js"></script>
 
     <link rel="stylesheet" href="http://www.bootcss.com/p/buttons/css/buttons.css">
@@ -41,18 +41,32 @@
 <body>
 
 
-
-
 <nav class="brown lighten-2">
     <div class="nav-wrapper">
         <a href="#!" class="brand-logo center">星云应用商店</a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="left hide-on-med-and-down">
             <li ><a href="index.html">所有</a></li>
-            <li class="active" ><a href="add.html">添加应用</a></li>
+            <li class="active"><a href="add.html">添加应用</a></li>
 
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+            <li ><a href="index.html">所有</a></li>
+            <li class="active"><a href="add.html">添加应用</a></li>
         </ul>
     </div>
 </nav>
+
+<!--<nav class="brown lighten-2">-->
+    <!--<div class="nav-wrapper">-->
+        <!--<a href="#!" class="brand-logo center">星云应用商店</a>-->
+        <!--<ul class="left hide-on-med-and-down">-->
+            <!--<li ><a href="index.html">所有</a></li>-->
+            <!--<li class="active" ><a href="add.html">添加应用</a></li>-->
+
+        <!--</ul>-->
+    <!--</div>-->
+<!--</nav>-->
 
 
 
@@ -145,7 +159,7 @@
 
 
 <script>
-
+    $(".button-collapse").sideNav();
     var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
     var nebPay = new NebPay();
     var dappAddress = "n1wBh2jrnZEo3k3JN7TuuSzb2K56XhpF45n";
