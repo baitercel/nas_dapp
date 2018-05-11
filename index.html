@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+          name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="telephone=no" name="format-detection">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="./img/icon.ico" rel="shortcut icon"/>
+    <title>星云应用商店</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="jquery.min.js"></script>
+
+    <link rel="stylesheet" href="http://www.bootcss.com/p/buttons/css/buttons.css">
+
+
+    <link rel="stylesheet" href="./materialize/css/materialize.min.css">
+    <script src="./materialize/js/materialize.min.js"></script>
+
+
+
+
+
+
+</head>
+<style>
+    .ccc{
+        margin: 2px;
+    }
+    body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        background: #eeeeee ;
+    }
+
+    main {
+        flex: 1 0 auto;
+    }
+</style>
+
+<body>
+
+
+
+
+<nav class="brown lighten-2">
+    <div class="nav-wrapper">
+        <a href="#!" class="brand-logo center">星云应用商店</a>
+        <ul class="left hide-on-med-and-down">
+            <li class="active"><a href="index.html">所有</a></li>
+            <li ><a href="add.html">添加应用</a></li>
+
+        </ul>
+    </div>
+</nav>
+
+
+<div class="noExtension hide" id="noExtension"  style="width: 100%;margin: auto;text-align: center;">
+    运行环境需要 <a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet" style="color: red;">星云钱包chrome拓展</a>才能顺利运行
+</div>
+
+<!--预加载-->
+<div id="pre-load" class="preloader-wrapper big active" style="z-index:100;position: absolute;top:50%; left:50%;margin-top: -32px;margin-left: -32px;">
+    <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+            <div class="circle"></div>
+        </div><div class="gap-patch">
+        <div class="circle"></div>
+    </div><div class="circle-clipper right">
+        <div class="circle"></div>
+    </div>
+    </div>
+
+</div>
+<!--预加载-->
+
+
+<div style="width: 912px;margin:auto;" id="handle_content">
+</div>
+<div style="clear: both"></div>
+
+<div style="text-align: center;margin:auto;" id="page_info">
+</div>
+
+
+
+
+
+
+<footer class="page-footer brown lighten-2" >
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">星云应用商店</h5>
+                <p class="grey-text text-lighten-4">基于星云链运行，使用前请先安装 </br>
+                    <a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet"><font color="#000">Chrome Nebulas-WebExtensionWallet</font></a>
+                    钱包插件。</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">支持</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" target="_blank" href="https://nebulas.io/">星云官网</a></li>
+                    <li><a class="grey-text text-lighten-3" target="_blank" href="https://nasscan.io/">浏览器地址</a></li>
+                    <li><a class="grey-text text-lighten-3" target="_blank"  href="https://incentive.nebulas.io/cn/signup.html?invite=grIMv">注册星云开发者(奖励110Nas)</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2018 Copyright
+            <a class="grey-text text-lighten-4 right" target="_blank" href="https://nebulas.io/"><img width="100%" style="margin-top: 5px;" src="data:image/svg+xml;base64,PHN2ZyBpZD0i5Zu+5bGCXzEiIGRhdGEtbmFtZT0i5Zu+5bGCIDEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDIxNCAzMCI+CiAgPGRlZnM+CiAgICA8c3R5bGU+LmNscy0xe2ZpbGwtcnVsZTpldmVub2RkO308L3N0eWxlPgogIDwvZGVmcz4KICA8dGl0bGU+bmViPC90aXRsZT4KICA8cGF0aCBjbGFzcz0iY2xzLTEiCiAgICAgICAgZD0iTTEwOC45MiwyLjVsLTIuNDEsNy4zMmgwbC05LjIsNC42OCw3LjEsMi40OCw0LjU1LDkuNSwyLjQxLTcuMzJoMGw5LjItNC42OEwxMTMuNDYsMTJabS00LjU0LDEzLjYzLTUtMS43Ni4xMS0uMDYsNi42OS0zLjQtMS43Miw1LjIzWm00LjY4LTExLjUxLDMuNiw3LjUzLTcuMywzLjcxWm0tLjI1LDE5Ljc1LTMuMzUtNyw1LjA3LDEuNzZabTkuNTktOS42OUwxMTEsMTguNDVsLTUuMy0xLjg1LjExLS4wNiw3LjM5LTMuNzYsNS4zLDEuODVaIi8+CiAgPHBhdGggY2xhc3M9ImNscy0xIgogICAgICAgIGQ9Ik0xNTUuNDEsMTQuNTZhMiwyLDAsMCwwLC40My0xLjIzVjEyLjE0YTIuMSwyLjEsMCwwLDAtMS40NS0ybDAsMGE0LjkxLDQuOTEsMCwwLDAtMS41NS0uMjVoLTQuOTF2OS43M2g1LjY0YTQuODIsNC44MiwwLDAsMCwxLjU0LS4yNWwuMDYsMGEyLjEsMi4xLDAsMCwwLDEuNDUtMnYtLjg3QTIuMzQsMi4zNCwwLDAsMCwxNTUuNDEsMTQuNTZabS02LjY4LTMuODRoNC4wN2E0LjA3LDQuMDcsMCwwLDEsMS4yOS4yMWwwLDBhMS4yNywxLjI3LDAsMCwxLC44NywxLjJ2MS4xOWExLjEyLDEuMTIsMCwwLDEtLjYxLDFoLTUuNjZabTUuNzIsNC4zOGExLjUxLDEuNTEsMCwwLDEsMS4yOSwxLjQxdi44NGExLjI2LDEuMjYsMCwwLDEtLjg3LDEuMmwtLjA1LDBhNCw0LDAsMCwxLTEuMjkuMjFoLTQuOFYxNS4wOVoiLz4KICA8cG9seWdvbiBjbGFzcz0iY2xzLTEiCiAgICAgICAgICAgcG9pbnRzPSIxMzYuMDcgMTkuNiAxMzYuMDcgMTAuMDUgMTQzLjg4IDEwLjA1IDE0My44OCAxMC44NSAxMzYuODUgMTAuODUgMTM2Ljg1IDE0LjQzIDE0My4xMSAxNC40MyAxNDMuMTEgMTUuMjIgMTM2Ljg1IDE1LjIyIDEzNi44NSAxOC44IDE0NC42NCAxOC44IDE0NC42NCAxOS42IDEzNi4wNyAxOS42Ii8+CiAgPHBvbHlnb24gY2xhc3M9ImNscy0xIgogICAgICAgICAgIHBvaW50cz0iMTI0LjkxIDExLjQ5IDEyNC45MSAxOS40MiAxMjQuMTMgMTkuNDIgMTI0LjEzIDkuNDggMTMxLjk3IDE3Ljk5IDEzMS45NyAxMC4wNyAxMzIuNzYgMTAuMDcgMTMyLjc2IDIwIDEyNC45MSAxMS40OSIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIKICAgICAgICBkPSJNMTYzLjY3LDE5LjYyYTQsNCwwLDAsMS0zLjk1LTMuODNWOS44N2guODN2NS45MWEzLjEyLDMuMTIsMCwwLDAsMy4xMiwzaC41OWEzLjEyLDMuMTIsMCwwLDAsMy4xMi0zVjkuODdoLjgzdjUuOTFhNCw0LDAsMCwxLTMuOTQsMy44NFoiLz4KICA8cG9seWdvbiBjbGFzcz0iY2xzLTEiCiAgICAgICAgICAgcG9pbnRzPSIxNzEuODIgMTkuNDIgMTcxLjgyIDEwLjA3IDE3Mi42MSAxMC4wNyAxNzIuNjEgMTguNjQgMTc5LjY5IDE4LjY0IDE3OS42OSAxOS40MiAxNzEuODIgMTkuNDIiLz4KICA8cGF0aCBjbGFzcz0iY2xzLTEiCiAgICAgICAgZD0iTTE5MC4yOCwxOS41M2wtMS4xOC0yLjM1aC01LjU3bC0xLjE4LDIuMzVoLS45bDQuODctOS42Nyw0Ljg2LDkuNjdabS0xLjU4LTMuMTUtMi4zOC00Ljc0LTIuMzgsNC43NFoiLz4KICA8cGF0aCBjbGFzcz0iY2xzLTEiCiAgICAgICAgZD0iTTE5My42NCwxOS40MXYtLjgyaDUuNDZhMy44OSwzLjg5LDAsMCwwLDEuMjItLjIsMS40MywxLjQzLDAsMCwwLC44NC0xLjI2VjE2LjZhMS40MiwxLjQyLDAsMCwwLS44Mi0xLjI0LDQsNCwwLDAsMC0xLjI1LS4yaC0zYTQuNzMsNC43MywwLDAsMS0xLjUyLS4yNUEyLDIsMCwwLDEsMTkzLjI0LDEzVjEyLjJhMiwyLDAsMCwxLDEuMzgtMS44OCw0LjY4LDQuNjgsMCwwLDEsMS41MS0uMjVoNC44MnYuODJoLTQuODJhMy45LDMuOSwwLDAsMC0xLjI1LjIxLDEuMTUsMS4xNSwwLDAsMC0uODEsMS4xVjEzYTEuMTUsMS4xNSwwLDAsMCwuODEsMS4xLDQsNCwwLDAsMCwxLjI2LjIxaDNhNC43Miw0LjcyLDAsMCwxLDEuNDguMjRsLjA5LDBhMi4yNCwyLjI0LDAsMCwxLDEuMzIsMnYuNTVhMi4yNSwyLjI1LDAsMCwxLTEuMzEsMmwtLjA4LDBhNC43NCw0Ljc0LDAsMCwxLTEuNDkuMjRaIi8+CiAgPHBhdGgKICAgIGQ9Ik0xNC44MSwxMy4yMmEyLjYxLDIuNjEsMCwwLDAsLjU1LTEuNzEsMi43OCwyLjc4LDAsMCwwLS4yNS0xLjE4LDIuNDEsMi40MSwwLDAsMC0uNjktLjg4LDIuNjcsMi42NywwLDAsMC0xLS41LDExLjYyLDExLjYyLDAsMCwwLTIuMzMtLjE0SDkuMTh2MTAuM0gxMFYxNC4yNGguOGExMy43MiwxMy43MiwwLDAsMCwyLjYxLS4xOEEyLjM5LDIuMzksMCwwLDAsMTQuODEsMTMuMjJabS0uODgtLjM2YTIuNjMsMi42MywwLDAsMS0yLC41NUgxMFY5LjY2aDEuODhjMS43LDAsMi41Ni42MiwyLjU2LDEuODVBMS45MiwxLjkyLDAsMCwxLDEzLjkzLDEyLjg2WiIvPgogIDxwYXRoCiAgICBkPSJNMjMuNTgsMTIuNTJhMy43LDMuNywwLDAsMC01LjQyLDBBNCw0LDAsMCwwLDE3LDE1LjM3YTQsNCwwLDAsMCwxLjExLDIuODIsMy43NCwzLjc0LDAsMCwwLDUuNDUsMCw0LjE5LDQuMTksMCwwLDAsMC01LjY4Wk0yMywxNy42NWEyLjg1LDIuODUsMCwwLDEtMi4xNS45NCwyLjc5LDIuNzksMCwwLDEtMi4xMy0uOTMsMy4yMywzLjIzLDAsMCwxLS44Ni0yLjI2LDMuMywzLjMsMCwwLDEsLjg5LTIuMywyLjgxLDIuODEsMCwwLDEsNC4yNCwwLDMuMjYsMy4yNiwwLDAsMSwuODksMi4yOEEzLjIxLDMuMjEsMCwwLDEsMjMsMTcuNjVaIi8+CiAgPHBvbHlnb24KICAgIHBvaW50cz0iMzYuMjMgMTEuNTQgMzMuODQgMTcuNTUgMzEuMzggMTEuNTQgMzEuMzIgMTEuNTQgMjguODUgMTcuNTUgMjYuNSAxMS41NCAyNS42OCAxMS41NCAyOC44MiAxOS4zNyAyOC44OSAxOS4zNyAzMS4zNSAxMy40MyAzMy44IDE5LjM3IDMzLjg3IDE5LjM3IDM3LjA3IDExLjU0IDM2LjIzIDExLjU0Ii8+CiAgPHBhdGgKICAgIGQ9Ik00NC42OCwxNi44YTMuMTIsMy4xMiwwLDAsMS0yLjg5LDEuODIsMi43MiwyLjcyLDAsMCwxLTItLjg4LDMuMzgsMy4zOCwwLDAsMS0uODgtMi4zMXYtLjA5aDYuNzZhNC4yLDQuMiwwLDAsMC0xLjEzLTIuOTEsMy42NCwzLjY0LDAsMCwwLTIuNjktMS4xLDMuNTEsMy41MSwwLDAsMC0yLjY4LDEuMTgsNC4yNiw0LjI2LDAsMCwwLDAsNS42OCwzLjU3LDMuNTcsMCwwLDAsMi43NCwxLjE4LDMuNzgsMy43OCwwLDAsMCwzLjQ4LTIuMjFaTTM5LDE0LjU1YTIuODMsMi44MywwLDAsMSwyLjg1LTIuNDIsMywzLDAsMCwxLDEuODcuNjQsMi44MywyLjgzLDAsMCwxLDEsMS43OWwwLC4xaC01LjhaIi8+CiAgPHBhdGgKICAgIGQ9Ik01OC4xMywxNi44YTMuMTIsMy4xMiwwLDAsMS0yLjg5LDEuODIsMi43MiwyLjcyLDAsMCwxLTItLjg4LDMuMzgsMy4zOCwwLDAsMS0uODgtMi4zMXYtLjA5aDYuNzZBNC4yLDQuMiwwLDAsMCw1OCwxMi40M2EzLjY0LDMuNjQsMCwwLDAtMi42OS0xLjEsMy41MSwzLjUxLDAsMCwwLTIuNjgsMS4xOCw0LjI2LDQuMjYsMCwwLDAsMCw1LjY4LDMuNTcsMy41NywwLDAsMCwyLjc0LDEuMTgsMy43OCwzLjc4LDAsMCwwLDMuNDgtMi4yMVptLTUuNy0yLjI1YTIuODMsMi44MywwLDAsMSwyLjg1LTIuNDIsMywzLDAsMCwxLDEuODcuNjQsMi44MywyLjgzLDAsMCwxLDEsMS43OWwwLC4xSDUyLjRaIi8+CiAgPHBhdGgKICAgIGQ9Ik02MS44MywxOC4xOGEzLjYxLDMuNjEsMCwwLDAsMi43MywxLjE4LDMuNjgsMy42OCwwLDAsMCwyLjg4LTEuNTZsLjE1LS4xOHYxLjQ4aC43OFY4LjU1aC0uNzh2NC41OGwtLjE1LS4yMWEzLjQ0LDMuNDQsMCwwLDAtMi45Mi0xLjU4LDMuNTksMy41OSwwLDAsMC0yLjY4LDEuMTgsNCw0LDAsMCwwLTEuMTIsMi44M0E0LDQsMCwwLDAsNjEuODMsMTguMThabS41OC01LjFhMywzLDAsMCwxLDQuMzcsMCwzLjI5LDMuMjksMCwwLDEsLjg3LDIuMywzLjE2LDMuMTYsMCwwLDEtLjkzLDIuMzMsMywzLDAsMCwxLTIuMTYuOTIsMi44MiwyLjgyLDAsMCwxLTIuMTMtMSwzLjM3LDMuMzcsMCwwLDEsMC00LjU2WiIvPgogIDxwYXRoCiAgICBkPSJNODAuODksMTIuNTFhMy41NCwzLjU0LDAsMCwwLTIuNjgtMS4xOCwzLjY3LDMuNjcsMCwwLDAtMi45NSwxLjVsLS4xNS4xOFY4LjU1aC0uNzhWMTkuMTFoLjc4VjE3LjVsLjE1LjIxYTMuNSwzLjUsMCwwLDAsMi45MiwxLjY2LDMuNTgsMy41OCwwLDAsMCwyLjY4LTEuMTgsNC4xOCw0LjE4LDAsMCwwLDAtNS42OFptLS42LDUuMWEyLjkyLDIuOTIsMCwwLDEtNC4zNCwwLDMuMzUsMy4zNSwwLDAsMS0uODktMi4zNUEzLjE5LDMuMTksMCwwLDEsNzUuOTQsMTNhMi45MiwyLjkyLDAsMCwxLDIuMTktLjkxLDIuODIsMi44MiwwLDAsMSwyLjE4LDEsMy4zMywzLjMzLDAsMCwxLC44NywyLjI4QTMuMjgsMy4yOCwwLDAsMSw4MC4yOSwxNy42WiIvPgogIDxwb2x5Z29uCiAgICBwb2ludHM9Ijg5LjE5IDExLjU0IDg2LjYzIDE3LjYzIDgzLjk5IDExLjU0IDgzLjE1IDExLjU0IDg2LjIgMTguNjEgODQuNzkgMjEuOTMgODUuNjMgMjEuOTMgOTAuMDQgMTEuNTQgODkuMTkgMTEuNTQiLz4KICA8cmVjdCB4PSI0Ny4zOCIgeT0iMTEuNDkiIHdpZHRoPSIwLjgzIiBoZWlnaHQ9IjcuNzIiLz4KICA8cGF0aAogICAgZD0iTTQ3LjM5LDE0LjA2aC44NGExLjg5LDEuODksMCwwLDEsMS44NS0xLjcyLDEuOCwxLjgsMCwwLDEsLjYyLjEydi0uOWEyLjYzLDIuNjMsMCwwLDAtLjYyLS4wOEEyLjc0LDIuNzQsMCwwLDAsNDcuMzksMTQuMDZaIi8+Cjwvc3ZnPgo=" alt=""></a>
+        </div>
+    </div>
+</footer>
+
+<script src=lib/nebPay.js></script>
+
+
+<script>
+
+
+    if(typeof(webExtensionWallet) === "undefined"){
+        $("#noExtension").removeClass("hide")
+    }
+
+
+
+    var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
+    var nebPay = new NebPay();
+    var dappAddress = "n1j8xyLPPhzFMoByKGkW4rfCqafJjvXMBFJ";
+    var num = 6;
+    pageOpen(num,1);
+
+    function cbSearch(resp) {
+
+        var result = resp.result
+        result = JSON.parse(JSON.parse(result))
+        var total = result[0].total;
+        var page = result[0].page
+        HandlePage(total,page)
+        HandleData(result);
+
+        console.log(8888);
+
+        console.log(result[1]);
+
+
+//        console.log(result.length);
+//
+//
+//
+//        console.log(result[0].info);
+//        var tests = [];
+//
+//        for(var x=0;x<result.length;x++){
+//            tests.push(result[x])
+//        }
+//
+//        console.log(tests);
+////			tests = ["232323","55555"]
+//
+//        console.log(9999);
+//
+//
+//        $.each(tests, function (i,v) {
+//            createItem(v);
+//        });
+
+    }
+
+
+
+
+    function HandlePage(total,page){
+        $("#pre-load").show();
+        var str_page_html = ''
+        for(var i =0;i<total;i++){
+            if(page == (i+1)){
+                str_page_html += '<li class="active"><a href="#!">'+(i+1)+'</a></li>'
+            }else{
+                str_page_html += '<li class="waves-effect"><a class="nas-click" data="'+(i+1)+'" href="#!">'+(i+1)+'</a></li>'
+            }
+        }
+
+
+        var chevron_left = ''
+        if(page == 1){
+            chevron_left = '<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>'
+        }else{
+
+            chevron_left = '<li class="waves-effect"><a href="#!" class="nas-click" data="'+(page-1)+'"><i class="material-icons">chevron_left</i></a></li>'
+        }
+        var chevron_right = ''
+        if(page == total){
+            chevron_right = '<li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>'
+        }else{
+            chevron_right = '<li class="waves-effect"><a href="#!" class="nas-click" data="'+(page+1)+'"><i class="material-icons">chevron_right</i></a></li>'
+        }
+        $("#page_info").html(
+                '<ul class="pagination">\
+                '+chevron_left+'\
+          '+str_page_html+'\
+                  '+chevron_right+'\
+                </ul>'
+        );
+
+
+
+        $(".nas-click").click(function(){
+            console.log($(this).text());
+            pageOpen(num,$(this).attr('data'));
+        })
+
+
+
+
+
+
+
+
+    }
+
+
+
+    function HandleData(result) {
+
+
+
+        var data_html = '';
+        for(var x=0;x<result[1].length;x++){
+            data_html += '\
+                <div class="col s12 m6 ccc" style="float:left;width:300px;">\
+                        <div class="card medium">\
+                            <a target="_blank" href="'+result[1][x].info.url+'">\
+                                <div class="card-image">\
+                                <img src="'+result[1][x].info.pic+'">\
+                                <span class="card-title" style="color: #5d4037    ;">'+result[1][x].info.name+'</span>\
+                                            </div>\
+                                        </a>\
+                                        <div class="card-content">\
+                                <p>'+result[1][x].info.content+'</p>\
+                            </div>\
+                            <div class="card-action">\
+                                <a style="font-size:12px;" target="_blank" href="https://explorer.nebulas.io/#/testnet/address/n1tLZ4zgHVya3hEdnE1R9VjAaL3CGfTNGTC">'+result[1][x].author+'</a>\
+                            </div>\
+                        </div>\
+                </div>'
+        }
+        $("#handle_content").html(
+                data_html
+        );
+        $("#pre-load").hide();
+
+    }
+
+
+
+
+
+    function pageOpen(num,page) {
+        $("#pre-load").show();
+
+        var to = dappAddress;
+        var value = "0";
+        var callFunction = "forEach";
+        var callArgs = [num,page];
+
+
+        nebPay.simulateCall(to, value, callFunction, JSON.stringify(callArgs), {    //使用nebpay的simulateCall接口去执行get查询, 模拟执行.不发送交易,不上链
+            listener: cbSearch      //指定回调函数
+        });
+    }
+
+
+
+
+</script>
+
+
+
+
+
+
+
+</body>
+</html>
